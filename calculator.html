@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        .calculator {
+    max-width: 300px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#result {
+    font-size: 18px;
+    font-weight: bold;
+    color: red;
+}
+
+    </style>
+    <script>
+       document.addEventListener("DOMContentLoaded", function() {
+    // Define the calculator module
+    const calculator = {
+        add: function(num1, num2) {
+            return num1 + num2;
+        },
+        subtract: function(num1, num2) {
+            return num1 - num2;
+        },
+        multiply: function(num1, num2) {
+            return num1 * num2;
+        },
+        divide: function(num1, num2) {
+            if (num2 === 0) {
+                return "Cannot divide by zero";
+            }
+            return num1 / num2;
+        }
+    };
+
+    // Function to handle button clicks
+    function handleButtonClick(operation) {
+        const input1 = parseFloat(document.getElementById("input1").value);
+        const input2 = parseFloat(document.getElementById("input2").value);
+
+        let result;
+        switch (operation) {
+            case "add":
+                result = calculator.add(input1, input2);
+                break;
+            case "subtract":
+                result = calculator.subtract(input1, input2);
+                break;
+            case "multiply":
+                result = calculator.multiply(input1, input2);
+                break;
+            case "divide":
+                result = calculator.divide(input1, input2);
+                break;
+            default:
+                result = "Invalid operation";
+        }
+
+        document.getElementById("result").textContent = `Result: ${result}`;
+    }
+
+    // Attach event listeners to buttons
+    document.getElementById("add").addEventListener("click", () => handleButtonClick("add"));
+    document.getElementById("subtract").addEventListener("click", () => handleButtonClick("subtract"));
+    document.getElementById("multiply").addEventListener("click", () => handleButtonClick("multiply"));
+    document.getElementById("divide").addEventListener("click", () => handleButtonClick("divide"));
+});
+    </script>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="input1" placeholder="Enter first number">
+        <input type="text" id="input2" placeholder="Enter second number">
+        <div class="buttons">
+            <button id="add">Add</button>
+            <button id="subtract">Subtract</button>
+            <button id="multiply">Multiply</button>
+            <button id="divide">Divide</button>
+        </div>
+        <p id="result">Result: </p>
+    </div>
+    
+</body>
+</html>
